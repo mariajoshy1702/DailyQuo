@@ -1,6 +1,5 @@
 package com.example.dailyquo.navigation
 
-import HomeScreen
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -8,11 +7,12 @@ import androidx.navigation.compose.composable
 import com.example.dailyquo.ui.theme.QuoteViewModel
 import com.example.dailyquo.ui.theme.screens.AddQuoteScreen
 import com.example.dailyquo.ui.theme.screens.AllQuotesScreen
+import com.example.dailyquo.ui.theme.screens.HomeScreen
 
 sealed class Screen(val route: String) {
-    data object Home : Screen("Quote for you")
-    data object AddQuote : Screen("Add more")
-    data object AllQuotes : Screen("Your quotes")
+    data object Home : Screen("QUOTE for you")
+    data object AddQuote : Screen("ADD more")
+    data object AllQuotes : Screen("YOUR quotes")
 }
 
 @Composable

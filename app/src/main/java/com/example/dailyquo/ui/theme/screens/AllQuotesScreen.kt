@@ -1,5 +1,6 @@
 package com.example.dailyquo.ui.theme.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.dailyquo.ui.theme.QuoteViewModel
 import androidx.compose.material3.CardDefaults
+import androidx.compose.ui.platform.LocalContext
 
 @Composable
 fun AllQuotesScreen(viewModel: QuoteViewModel) {
@@ -37,10 +39,13 @@ fun AllQuotesScreen(viewModel: QuoteViewModel) {
 
 @Composable
 fun QuoteItem(text: String, author: String, onDeleteClick: () -> Unit) {
+    val context = LocalContext.current
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiary),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Row(
@@ -50,12 +55,30 @@ fun QuoteItem(text: String, author: String, onDeleteClick: () -> Unit) {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column(modifier = Modifier.weight(1f)) {
-                Text(text = text, style = MaterialTheme.typography.bodyLarge)
-                Text(text = "- $author", style = MaterialTheme.typography.bodyMedium)
+                Text(
+                    text = text,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.secondary
+                )
+                Text(
+                    text = "- $author",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.8f)
+                )
             }
-            IconButton(onClick = onDeleteClick) {
-                Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete")
+            IconButton(
+                onClick = {
+                    onDeleteClick()
+                    Toast.makeText(context, "Quote deleted!", Toast.LENGTH_SHORT).show()
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Delete,
+                    contentDescription = "Delete",
+                    tint = MaterialTheme.colorScheme.secondary
+                )
             }
         }
     }
 }
+

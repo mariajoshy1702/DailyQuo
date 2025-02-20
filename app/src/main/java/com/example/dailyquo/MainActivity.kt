@@ -23,15 +23,12 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Set up the database and repository
         val database = QuoteDatabase.getDatabase(applicationContext)
         val repository = QuoteRepository(database.quoteDao())
 
-        // Use the ViewModelFactory to create the ViewModel
         val viewModel =
             ViewModelProvider(this, ViewModelFactory(repository))[QuoteViewModel::class.java]
 
-        // Set up the UI
         setContent {
             DAILYQUOTheme {
                 val navController = rememberNavController()
@@ -41,7 +38,7 @@ class MainActivity : ComponentActivity() {
                         BottomNavigationBar(navController)
                     }
                 ) { paddingValues ->
-                    // Pass the paddingValues down to the NavGraph or other composables
+
                     Box(modifier = Modifier.padding(paddingValues)) {
                         NavGraph(
                             navController = navController,
@@ -56,14 +53,17 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun AppHeader() {
-        CenterAlignedTopAppBar(  // **Creates a centered title in the app bar**
-            title = { Text(
-                text = "Daily Quote",
-                style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.onPrimary
-            )  },
+        CenterAlignedTopAppBar(
+            title = {
+                Text(
+                    text = "DAILY QUOTE",
+                    style = MaterialTheme.typography.titleLarge,
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
+            },
             colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                containerColor = MaterialTheme.colorScheme.primary
+                containerColor = MaterialTheme.colorScheme.secondary,
+                titleContentColor = MaterialTheme.colorScheme.onPrimary
             )
         )
     }
@@ -76,28 +76,39 @@ class MainActivity : ComponentActivity() {
             Screen.AllQuotes
         )
 
-        // Get the current route from the NavController
         val currentRoute by navController.currentBackStackEntryAsState()
 
         NavigationBar(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
+            containerColor = MaterialTheme.colorScheme.secondary,
+            contentColor = MaterialTheme.colorScheme.onPrimary
         ) {
             items.forEach { screen ->
                 val isSelected = currentRoute?.destination?.route == screen.route
 
                 NavigationBarItem(
-                    label = { Text(screen.route) },
+                    label = {
+                        Text(
+                            screen.route,
+                            color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onPrimary
+                        )
+                    },
                     selected = isSelected,
                     onClick = {
-                        if (!isSelected) { // Only navigate if not already on the screen
+                        if (!isSelected) {
                             navController.navigate(screen.route)
                         }
                     },
                     icon = {},
-                    enabled = !isSelected // Disable if already selected
+                    enabled = !isSelected,
+                    colors = NavigationBarItemDefaults.colors(
+                        selectedIconColor = MaterialTheme.colorScheme.primary,
+                        selectedTextColor = MaterialTheme.colorScheme.primary,
+                        unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
+                        unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
+                        indicatorColor = MaterialTheme.colorScheme.tertiary
+                    )
                 )
             }
         }
     }
-
 }

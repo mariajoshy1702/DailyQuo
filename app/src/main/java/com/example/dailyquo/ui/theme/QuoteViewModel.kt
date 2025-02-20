@@ -42,7 +42,7 @@ class QuoteViewModel(private val repository: QuoteRepository) : ViewModel() {
     }
 
     private suspend fun populateDatabase() {
-        if (repository.getQuotesCount() == 0) { // Ensure it only runs if DB is empty
+        if (repository.getQuotesCount() == 0) {
             val defaultQuotes = listOf(
                 Quote(text = "The only way to do great work is to love what you do.", author = "Steve Jobs"),
                 Quote(text = "In the middle of every difficulty lies opportunity.", author = "Albert Einstein"),

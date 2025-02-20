@@ -1,37 +1,34 @@
 package com.example.dailyquo.ui.theme
 
-import android.os.Build
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.Color
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
-)
-
-private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
+private val lightColors = lightColorScheme(
+    primary = Orange900,
     onPrimary = Color.White,
+    secondary = Orange500,
     onSecondary = Color.White,
+    tertiary = Orange100,
     onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    background = BackgroundColor,
+    onBackground = Color.Black,
+    surface = Color.White,
+    onSurface = Color.Black,
 )
 
+@Composable
+fun DAILYQUOTheme(
+    content: @Composable () -> Unit
+) {
+    MaterialTheme(
+        colorScheme = lightColors,
+        typography = Typography,
+        content = content
+    )
+}
+/*
 @Composable
 fun DAILYQUOTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -55,3 +52,5 @@ fun DAILYQUOTheme(
         content = content
     )
 }
+
+ */
