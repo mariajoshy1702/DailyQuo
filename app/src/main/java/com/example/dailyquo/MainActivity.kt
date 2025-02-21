@@ -89,7 +89,7 @@ class MainActivity : ComponentActivity() {
                     label = {
                         Text(
                             screen.route,
-                            color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onPrimary
+                            color = if (isSelected) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.onPrimary
                         )
                     },
                     selected = isSelected,
@@ -101,8 +101,8 @@ class MainActivity : ComponentActivity() {
                     icon = {},
                     enabled = !isSelected,
                     colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = MaterialTheme.colorScheme.primary,
-                        selectedTextColor = MaterialTheme.colorScheme.primary,
+                        selectedIconColor = MaterialTheme.colorScheme.tertiary,
+                        selectedTextColor = MaterialTheme.colorScheme.tertiary,
                         unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
                         unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
                         indicatorColor = MaterialTheme.colorScheme.tertiary

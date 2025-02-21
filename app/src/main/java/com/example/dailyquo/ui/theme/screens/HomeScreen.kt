@@ -24,16 +24,12 @@ fun HomeScreen(viewModel: QuoteViewModel) {
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
-        verticalArrangement = Arrangement.SpaceBetween,
+        verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.weight(1f))
-
         quote?.let {
             QuoteCard(quote = it)
         } ?: Text(text = "Loading...", fontSize = 20.sp)
-
-        Spacer(modifier = Modifier.weight(1f))
 
         Button(
             onClick = { viewModel.fetchRandomQuote() },
@@ -43,7 +39,7 @@ fun HomeScreen(viewModel: QuoteViewModel) {
             shape = CircleShape,
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.tertiary,
-                contentColor = MaterialTheme.colorScheme.secondary
+                contentColor = MaterialTheme.colorScheme.primary
             )
         ) {
             Text(
@@ -52,6 +48,6 @@ fun HomeScreen(viewModel: QuoteViewModel) {
                 textAlign = TextAlign.Center
             )
         }
-
     }
 }
+

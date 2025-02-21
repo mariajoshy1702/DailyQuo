@@ -19,7 +19,7 @@ sealed class Screen(val route: String) {
 fun NavGraph(navController: NavHostController, viewModel: QuoteViewModel) {
     NavHost(navController = navController, startDestination = Screen.Home.route) {
         composable(Screen.Home.route) { HomeScreen(viewModel) }
-        composable(Screen.AddQuote.route) { AddQuoteScreen(viewModel) }
-        composable(Screen.AllQuotes.route) { AllQuotesScreen(viewModel) }
+        composable(Screen.AddQuote.route) { AddQuoteScreen(viewModel, navController) }
+        composable(Screen.AllQuotes.route) { AllQuotesScreen(viewModel, navController) }
     }
 }

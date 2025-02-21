@@ -1,6 +1,7 @@
 package com.example.dailyquo.ui.theme.screens
 
 import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,11 +20,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.dailyquo.data.Quote
+import com.example.dailyquo.navigation.Screen
 import com.example.dailyquo.ui.theme.QuoteViewModel
 
 @Composable
-fun AddQuoteScreen(viewModel: QuoteViewModel) {
+fun AddQuoteScreen(viewModel: QuoteViewModel, navController: NavHostController) {
+    BackHandler {
+        navController.navigate(Screen.Home.route) {
+            popUpTo(Screen.Home.route) { inclusive = true }
+        }
+    }
     var text by remember { mutableStateOf("") }
     var author by remember { mutableStateOf("") }
     val context = LocalContext.current
@@ -64,7 +72,7 @@ fun AddQuoteScreen(viewModel: QuoteViewModel) {
                 enabled = text.isNotBlank() && author.isNotBlank(),
                 modifier = Modifier.padding(top = 8.dp),
                 colors = androidx.compose.material3.ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
+                    containerColor = MaterialTheme.colorScheme.secondary,
                     contentColor = MaterialTheme.colorScheme.onPrimary
                 )
             ) {

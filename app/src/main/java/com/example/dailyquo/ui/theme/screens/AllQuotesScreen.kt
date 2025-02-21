@@ -1,6 +1,7 @@
 package com.example.dailyquo.ui.theme.screens
 
 import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,10 +23,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.dailyquo.ui.theme.QuoteViewModel
 import androidx.compose.material3.CardDefaults
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NavHostController
+import com.example.dailyquo.navigation.Screen
 
 @Composable
-fun AllQuotesScreen(viewModel: QuoteViewModel) {
+fun AllQuotesScreen(viewModel: QuoteViewModel, navController: NavHostController) {
+    BackHandler {
+        navController.navigate(Screen.Home.route) {
+            popUpTo(Screen.Home.route) { inclusive = true }
+        }
+    }
     val quotes by viewModel.allQuotes.collectAsState(initial = emptyList())
 
     LazyColumn(modifier = Modifier.padding(16.dp)) {
@@ -58,12 +67,12 @@ fun QuoteItem(text: String, author: String, onDeleteClick: () -> Unit) {
                 Text(
                     text = text,
                     style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.secondary
+                    color = Color(0xFF8B4513),
                 )
                 Text(
                     text = "- $author",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.8f)
+                    color = Color(0xFF8B4513).copy(alpha = 0.8f)
                 )
             }
             IconButton(
