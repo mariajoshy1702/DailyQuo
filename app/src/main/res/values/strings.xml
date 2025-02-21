@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">DAILYQUO</string>
+    <string name="app_name">DailyQuo</string>
+    <string name="daily_quote_header">DAILY QUOTE</string>
+    <string name="unknown">Unknown</string>
+    <string name="quote_deleted">Quote deleted!</string>
+    <string name="delete_button">Delete</string>
+    <string name="quote">Quote</string>
+    <string name="author">Author</string>
+    <string name="quote_added_successfully">Quote added successfully!</string>
+    <string name="please_enter_both_fields">Please enter both fields!</string>
+    <string name="add_your_quote">Add Your Quote</string>
+    <string name="blank" />
+    <string name="loading">Loading…</string>
+    <string name="tap_for_a_new_quote">Tap for a\nNew Quote!</string>
 </resources>
