@@ -4,20 +4,19 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.rememberNavController
 import com.example.dailyquo.data.QuoteDatabase
-import com.example.dailyquo.repository.QuoteRepository
-import com.example.dailyquo.ui.theme.QuoteViewModel
-import com.example.dailyquo.ui.theme.DAILYQUOTheme
 import com.example.dailyquo.navigation.NavGraph
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
-import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.dailyquo.navigation.Screen
+import com.example.dailyquo.repository.QuoteRepository
+import com.example.dailyquo.ui.theme.DAILYQUOTheme
+import com.example.dailyquo.ui.theme.QuoteViewModel
 import com.example.dailyquo.ui.theme.ViewModelFactory
+import com.example.dailyquo.ui.theme.components.AppHeader
+import com.example.dailyquo.ui.theme.components.BottomNavigationBar
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,11 +33,8 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 Scaffold(
                     topBar = { AppHeader() },
-                    bottomBar = {
-                        BottomNavigationBar(navController)
-                    }
+                    bottomBar = { BottomNavigationBar(navController) }
                 ) { paddingValues ->
-
                     Box(modifier = Modifier.padding(paddingValues)) {
                         NavGraph(
                             navController = navController,
@@ -46,68 +42,6 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                 }
-            }
-        }
-    }
-
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    fun AppHeader() {
-        CenterAlignedTopAppBar(
-            title = {
-                Text(
-                    text = "DAILY QUOTE",
-                    style = MaterialTheme.typography.titleLarge,
-                    color = MaterialTheme.colorScheme.onPrimary
-                )
-            },
-            colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                containerColor = MaterialTheme.colorScheme.secondary,
-                titleContentColor = MaterialTheme.colorScheme.onPrimary
-            )
-        )
-    }
-
-    @Composable
-    fun BottomNavigationBar(navController: androidx.navigation.NavHostController) {
-        val items = listOf(
-            Screen.Home,
-            Screen.AddQuote,
-            Screen.AllQuotes
-        )
-
-        val currentRoute by navController.currentBackStackEntryAsState()
-
-        NavigationBar(
-            containerColor = MaterialTheme.colorScheme.secondary,
-            contentColor = MaterialTheme.colorScheme.onPrimary
-        ) {
-            items.forEach { screen ->
-                val isSelected = currentRoute?.destination?.route == screen.route
-
-                NavigationBarItem(
-                    label = {
-                        Text(
-                            screen.route,
-                            color = if (isSelected) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.onPrimary
-                        )
-                    },
-                    selected = isSelected,
-                    onClick = {
-                        if (!isSelected) {
-                            navController.navigate(screen.route)
-                        }
-                    },
-                    icon = {},
-                    enabled = !isSelected,
-                    colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = MaterialTheme.colorScheme.tertiary,
-                        selectedTextColor = MaterialTheme.colorScheme.tertiary,
-                        unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
-                        unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
-                        indicatorColor = MaterialTheme.colorScheme.tertiary
-                    )
-                )
             }
         }
     }

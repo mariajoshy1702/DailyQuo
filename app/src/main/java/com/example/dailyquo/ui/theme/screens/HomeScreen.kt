@@ -6,9 +6,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.dailyquo.R
 import com.example.dailyquo.ui.theme.QuoteViewModel
 import com.example.dailyquo.ui.theme.components.QuoteCard
 
@@ -29,7 +31,7 @@ fun HomeScreen(viewModel: QuoteViewModel) {
     ) {
         quote?.let {
             QuoteCard(quote = it)
-        } ?: Text(text = "Loading...", fontSize = 20.sp)
+        } ?: Text(text = stringResource(R.string.loading), fontSize = 20.sp)
 
         Button(
             onClick = { viewModel.fetchRandomQuote() },
@@ -43,7 +45,7 @@ fun HomeScreen(viewModel: QuoteViewModel) {
             )
         ) {
             Text(
-                text = "Tap for a\nNew Quote!",
+                text = stringResource(R.string.tap_for_a_new_quote),
                 fontSize = 18.sp,
                 textAlign = TextAlign.Center
             )

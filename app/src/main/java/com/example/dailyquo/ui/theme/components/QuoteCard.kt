@@ -19,11 +19,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.dailyquo.R
 import com.example.dailyquo.data.Quote
 
 @Composable
@@ -57,9 +59,9 @@ fun QuoteCard(quote: Quote) {
                 lineHeight = 40.sp,
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
             )
-            Spacer(modifier = Modifier.height(8 .dp))
+            Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "- ${quote.author.ifEmpty { "Unknown" }}",
+                text = "- ${quote.author.ifEmpty { stringResource(R.string.unknown) }}",
                 fontSize = 15.sp,
                 fontWeight = FontWeight.Light,
                 fontFamily = FontFamily.Cursive,
