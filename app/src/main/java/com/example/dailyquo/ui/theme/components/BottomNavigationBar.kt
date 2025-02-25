@@ -31,7 +31,8 @@ fun BottomNavigationBar(navController: androidx.navigation.NavHostController) {
                 label = {
                     Text(
                         screen.route,
-                        color = if (isSelected) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.onPrimary
+                        color = if (isSelected) MaterialTheme.colorScheme.tertiary
+                        else MaterialTheme.colorScheme.onSecondary
                     )
                 },
                 selected = isSelected,
@@ -45,8 +46,8 @@ fun BottomNavigationBar(navController: androidx.navigation.NavHostController) {
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = MaterialTheme.colorScheme.tertiary,
                     selectedTextColor = MaterialTheme.colorScheme.tertiary,
-                    unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
-                    unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
+                    unselectedIconColor = MaterialTheme.colorScheme.onSecondary,
+                    unselectedTextColor = MaterialTheme.colorScheme.onSecondary,
                     indicatorColor = MaterialTheme.colorScheme.tertiary
                 )
             )

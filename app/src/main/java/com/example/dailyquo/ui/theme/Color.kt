@@ -9,5 +9,6 @@ val Orange700 = Color(0xFFF57C00)
 val Orange900 = Color(0xFFEF6C00)
 val Brown = Color(0xFF8B4513)
 val DarkBrown = Color(0xFF5D3A1A)
+val DarkerBrown = Color(0xFF3F2513)  // Darker shade of brown
 
 val BackgroundColor = Color(0xFFF9F9F9)

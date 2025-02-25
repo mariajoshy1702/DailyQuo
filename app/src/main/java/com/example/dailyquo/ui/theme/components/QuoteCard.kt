@@ -1,9 +1,7 @@
 package com.example.dailyquo.ui.theme.components
 
-import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.spring
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,7 +16,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -26,50 +23,62 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.dailyquo.R
-import com.example.dailyquo.data.Quote
+import com.example.dailyquo.data.room.Quote
 
 @Composable
 fun QuoteCard(quote: Quote) {
-    Card(
-        shape = RoundedCornerShape(12.dp),
+
+    Box(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .padding(12.dp)
-            .animateContentSize(
-                animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy)
-            ),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.tertiary
-        )
     ) {
-        Column(
+        GetLeftCanvas()
+        Card(
             modifier = Modifier
-                .padding(16.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(
+                    start = 20.dp,
+                    top = 8.dp,
+                    bottom = 8.dp
+                ),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondary),
+            shape = RoundedCornerShape(
+                topStart = 0.dp,
+                topEnd = 16.dp,
+                bottomStart = 16.dp,
+                bottomEnd = 16.dp
+            )
         ) {
-            Text(
-                text = "❝ ${quote.text} ❞",
-                fontSize = 35.sp,
-                fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily.Cursive,
-                textAlign = TextAlign.Center,
-                color = Color(0xFF8B4513),
-                lineHeight = 40.sp,
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = "- ${quote.author.ifEmpty { stringResource(R.string.unknown) }}",
-                fontSize = 15.sp,
-                fontWeight = FontWeight.Light,
-                fontFamily = FontFamily.Cursive,
-                textAlign = TextAlign.Center,
-                color = Color(0xFF8B4513),
-                modifier = Modifier.padding(horizontal = 16.dp)
-            )
+            Column(
+                modifier = Modifier
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "❝ ${quote.text} ❞",
+                    fontSize = 30.sp,
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = FontFamily.Cursive,
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.onSecondary,
+                    lineHeight = 36.sp,
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "- ${quote.author.ifEmpty { stringResource(R.string.unknown) }}",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Light,
+                    fontFamily = FontFamily.Cursive,
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.onSecondary,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+            }
         }
     }
 }
-

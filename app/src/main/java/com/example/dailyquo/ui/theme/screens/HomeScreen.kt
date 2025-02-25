@@ -2,8 +2,14 @@ package com.example.dailyquo.ui.theme.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -19,37 +25,49 @@ fun HomeScreen(viewModel: QuoteViewModel) {
     val quote by viewModel.randomQuote.collectAsState()
 
     LaunchedEffect(Unit) {
-        viewModel.fetchRandomQuote()
+        if (quote == null) {
+            viewModel.fetchRandomQuote()
+        }
     }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
-        verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Spacer(modifier = Modifier.weight(0.5f))
+
         quote?.let {
             QuoteCard(quote = it)
-        } ?: Text(text = stringResource(R.string.loading), fontSize = 20.sp)
+        } ?: Text(
+            text = stringResource(R.string.loading),
+            fontSize = 20.sp
+        )
 
-        Button(
-            onClick = { viewModel.fetchRandomQuote() },
-            modifier = Modifier
-                .padding(16.dp)
-                .size(165.dp),
-            shape = CircleShape,
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.tertiary,
-                contentColor = MaterialTheme.colorScheme.primary
-            )
+        Spacer(modifier = Modifier.weight(1f))
+
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+            contentAlignment = Alignment.BottomCenter
         ) {
-            Text(
-                text = stringResource(R.string.tap_for_a_new_quote),
-                fontSize = 18.sp,
-                textAlign = TextAlign.Center
-            )
+            Button(
+                onClick = { viewModel.fetchRandomQuote() },
+                modifier = Modifier
+                    .size(200.dp)
+                    .padding(16.dp),
+                shape = CircleShape,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.secondary,
+                    contentColor = MaterialTheme.colorScheme.onSecondary
+                )
+            ) {
+                Text(
+                    text = stringResource(R.string.tap_for_a_new_quote),
+                    fontSize = 15.sp,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
     }
 }
-
