@@ -9,7 +9,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.rememberNavController
-import com.example.dailyquo.data.QuoteDatabase
+import com.example.dailyquo.data.room.QuoteDatabase
+import com.example.dailyquo.data.api.ApiClient
 import com.example.dailyquo.navigation.NavGraph
 import com.example.dailyquo.repository.QuoteRepository
 import com.example.dailyquo.ui.theme.DAILYQUOTheme
@@ -23,7 +24,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val database = QuoteDatabase.getDatabase(applicationContext)
-        val repository = QuoteRepository(database.quoteDao())
+        val apiService = ApiClient.retrofit
+        val repository = QuoteRepository(database.quoteDao(), apiService)
 
         val viewModel =
             ViewModelProvider(this, ViewModelFactory(repository))[QuoteViewModel::class.java]
