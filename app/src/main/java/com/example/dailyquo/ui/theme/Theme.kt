@@ -28,8 +28,8 @@ private val darkColors = darkColorScheme(
     onTertiary = Orange900,
     background = Color.Black,
     onBackground = Color.White,
-    surface = Color.White,
-    onSurface = Color.Black,
+    surface = Color.Black,
+    onSurface = Color.White,
 )
 
 @Composable
