@@ -58,6 +58,7 @@ dependencies {
     implementation(libs.androidx.room.common)
     implementation(libs.generativeai)
     implementation(libs.firebase.appdistribution.gradle)
+    implementation(libs.androidx.media3.common.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -72,7 +73,7 @@ dependencies {
 
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
-
+    implementation(libs.androidx.compose.material.icons.extended)
 
     // Room Database
     implementation(libs.androidx.room.runtime)  // Room runtime
@@ -87,7 +88,6 @@ dependencies {
 
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
-    //implementation(libs.coroutines)
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging)
 

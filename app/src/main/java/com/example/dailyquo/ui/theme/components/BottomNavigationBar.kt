@@ -7,6 +7,7 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.dailyquo.navigation.Screen
 
@@ -15,7 +16,7 @@ fun BottomNavigationBar(navController: androidx.navigation.NavHostController) {
     val items = listOf(
         Screen.Home,
         Screen.AddQuote,
-        Screen.AllQuotes
+        Screen.SavedQuotes
     )
 
     val currentRoute by navController.currentBackStackEntryAsState()
@@ -31,7 +32,7 @@ fun BottomNavigationBar(navController: androidx.navigation.NavHostController) {
                 label = {
                     Text(
                         screen.route,
-                        color = if (isSelected) MaterialTheme.colorScheme.tertiary
+                        color = if (isSelected) Color.Gray.copy(alpha = 0.65f)
                         else MaterialTheme.colorScheme.onSecondary
                     )
                 },
@@ -44,11 +45,11 @@ fun BottomNavigationBar(navController: androidx.navigation.NavHostController) {
                 icon = {},
                 enabled = !isSelected,
                 colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = MaterialTheme.colorScheme.tertiary,
-                    selectedTextColor = MaterialTheme.colorScheme.tertiary,
+                    selectedIconColor = Color.Gray.copy(alpha = 0.65f),
+                    selectedTextColor = Color.Gray.copy(alpha = 0.65f),
                     unselectedIconColor = MaterialTheme.colorScheme.onSecondary,
                     unselectedTextColor = MaterialTheme.colorScheme.onSecondary,
-                    indicatorColor = MaterialTheme.colorScheme.tertiary
+                    indicatorColor = Color.Transparent
                 )
             )
         }

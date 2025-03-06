@@ -15,8 +15,8 @@ fun GetLeftCanvas(){
     val bubbleColor = MaterialTheme.colorScheme.secondary
     Canvas(
         modifier = Modifier
-            .size(20.dp)
-            .offset(x = 0.dp, y = 8.dp)
+            .size(30.dp)
+            .offset(x = (-10).dp, y = 8.dp)
     ) {
         scale(scaleX = -1f, scaleY = 1f) {
             val path = Path().apply {
@@ -37,7 +37,7 @@ fun GetRightCanvas() {
     Canvas(
         modifier = Modifier
             .size(30.dp)
-            .offset(x = 5.dp, y = (-8).dp)
+            .offset(x = 0.dp, y = (-8).dp)
     ) {
         val path = Path().apply {
             moveTo(size.width, size.height)
@@ -48,3 +48,4 @@ fun GetRightCanvas() {
         drawPath(path, color = bubbleColor)
     }
 }
+

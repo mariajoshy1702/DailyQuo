@@ -33,6 +33,7 @@ import com.example.dailyquo.data.room.Quote
 import com.example.dailyquo.navigation.Screen
 import com.example.dailyquo.ui.theme.QuoteViewModel
 import com.example.dailyquo.ui.theme.components.GetRightCanvas
+import com.example.dailyquo.ui.theme.components.ShowTitleText
 import com.example.dailyquo.ui.theme.components.showToastMessage
 
 @Composable
@@ -52,97 +53,93 @@ fun AddQuoteScreen(viewModel: QuoteViewModel, navController: NavHostController) 
             .padding(12.dp),
         contentAlignment = Alignment.Center
     ) {
-        Box(
-            contentAlignment = Alignment.BottomEnd
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Card(
-                modifier = Modifier
-                    .wrapContentHeight()
-                    .padding(start = 8.dp, end = 20.dp, top = 8.dp, bottom = 8.dp),
-                shape = RoundedCornerShape(
-                    topStart = 16.dp,
-                    topEnd = 16.dp,
-                    bottomStart = 16.dp,
-                    bottomEnd = 0.dp
-                ),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.secondary
-                )
+
+            ShowTitleText(stringResource(R.string.add_your_quote))
+
+            Box(
+                contentAlignment = Alignment.BottomEnd
             ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
+                Card(
                     modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxWidth()
+                        .wrapContentHeight()
+                        .padding(start = 8.dp, end = 20.dp, top = 8.dp, bottom = 8.dp),
+                    shape = RoundedCornerShape(
+                        topStart = 16.dp,
+                        topEnd = 16.dp,
+                        bottomStart = 16.dp,
+                        bottomEnd = 0.dp
+                    ),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.secondary
+                    )
                 ) {
-                    TextField(
-                        value = text,
-                        onValueChange = { text = it },
-                        label = {
-                            Text(
-                                stringResource(R.string.quote),
-                                color = MaterialTheme.colorScheme.onBackground
-                            )
-                        },
-                        modifier = Modifier.padding(8.dp),
-                        textStyle = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onBackground)
-                    )
-                    TextField(
-                        value = author,
-                        onValueChange = { author = it },
-                        label = {
-                            Text(
-                                stringResource(R.string.author),
-                                color = MaterialTheme.colorScheme.onBackground
-                            )
-                        },
-                        modifier = Modifier.padding(8.dp),
-                        textStyle = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onBackground)
-                    )
-                    Button(
-                        onClick = {
-                            if (text.isNotBlank() && author.isNotBlank()) {
-                                viewModel.addQuote(Quote(text = text, author = author))
-                                showToastMessage(
-                                    context,
-                                    context.getString(R.string.quote_added_successfully)
-                                )
-                                text = context.getString(R.string.blank)
-                                author = context.getString(R.string.blank)
-                            } else {
-                                showToastMessage(
-                                    context,
-                                    context.getString(R.string.please_enter_both_fields)
-                                )
-                            }
-                        },
-                        enabled = text.isNotBlank() && author.isNotBlank(),
-                        modifier = Modifier.padding(top = 8.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = if (text.isNotBlank() && author.isNotBlank()) {
-                                MaterialTheme.colorScheme.tertiary
-                            } else {
-                                if (MaterialTheme.colorScheme.background == Color.Black) Color(
-                                    0xFF555555
-                                )
-                                else Color.Gray
-                            },
-                            contentColor = if (text.isNotBlank() && author.isNotBlank()) {
-                                MaterialTheme.colorScheme.onTertiary
-                            } else {
-                                Color.White
-                            }
-                        )
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center,
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .fillMaxWidth()
                     ) {
-                        Text(
-                            stringResource(R.string.add_your_quote),
-                            style = MaterialTheme.typography.bodyLarge,
+                        TextField(
+                            value = text,
+                            onValueChange = { text = it },
+                            label = {
+                                Text(
+                                    stringResource(R.string.quote),
+                                    color = MaterialTheme.colorScheme.onBackground
+                                )
+                            },
+                            modifier = Modifier.padding(8.dp),
+                            textStyle = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onBackground)
                         )
+                        TextField(
+                            value = author,
+                            onValueChange = { author = it },
+                            label = {
+                                Text(
+                                    stringResource(R.string.author),
+                                    color = MaterialTheme.colorScheme.onBackground
+                                )
+                            },
+                            modifier = Modifier.padding(8.dp),
+                            textStyle = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onBackground)
+                        )
+                        Button(
+                            onClick = {
+                                if (text.isNotBlank() && author.isNotBlank()) {
+                                    viewModel.addQuote(Quote(text = text, author = author))
+                                    showToastMessage(
+                                        context,
+                                        context.getString(R.string.quote_added_successfully)
+                                    )
+                                    text = context.getString(R.string.blank)
+                                    author = context.getString(R.string.blank)
+                                } else {
+                                    showToastMessage(
+                                        context,
+                                        context.getString(R.string.please_enter_both_fields)
+                                    )
+                                }
+                            },
+                            modifier = Modifier.padding(top = 8.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Gray.copy(alpha = 0.25f),
+                                contentColor = MaterialTheme.colorScheme.onSecondary
+                            ),
+                        ) {
+                            Text(
+                                stringResource(R.string.add_button),
+                                style = MaterialTheme.typography.bodyLarge,
+                            )
+                        }
                     }
                 }
+                GetRightCanvas()
             }
-            GetRightCanvas()
         }
     }
 }
