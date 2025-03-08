@@ -1,5 +1,7 @@
 package com.example.dailyquo.ui.theme.screens
 
+import androidx.activity.compose.BackHandler
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -30,6 +32,11 @@ import com.example.dailyquo.ui.theme.components.ShowTitleText
 
 @Composable
 fun HomeScreen(viewModel: QuoteViewModel) {
+    val activity = LocalActivity.current
+    BackHandler {
+        activity?.moveTaskToBack(true)
+    }
+
     val quote by viewModel.randomQuote.collectAsState()
     val errorMessage by viewModel.errorState.collectAsState()
 

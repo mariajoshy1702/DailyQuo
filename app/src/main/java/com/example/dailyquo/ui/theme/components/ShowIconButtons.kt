@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.outlined.BookmarkBorder
+import androidx.compose.material.icons.outlined.ContentCopy
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -14,6 +16,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.dailyquo.R
 import com.example.dailyquo.data.room.Quote
@@ -51,5 +54,36 @@ fun ShowSaveIconButton(quote: Quote, viewModel: QuoteViewModel, modifier: Modifi
                 tint = MaterialTheme.colorScheme.onSecondary
             )
         }
+    }
+}
+
+
+@Composable
+fun ShowDeleteIconButton(onDeleteClick: () -> Unit){
+    IconButton(
+        onClick = {
+            onDeleteClick()
+        }
+    ) {
+        Icon(
+            imageVector = Icons.Default.Delete,
+            contentDescription = stringResource(R.string.delete_button),
+            tint = MaterialTheme.colorScheme.onSecondary
+        )
+    }
+}
+
+@Composable
+fun ShowCopyIconButton(onCopyClick: () -> Unit){
+    IconButton(
+        onClick = {
+            onCopyClick()
+        }
+    ) {
+        Icon(
+            imageVector = Icons.Outlined.ContentCopy,
+            contentDescription = stringResource(R.string.copy),
+            tint = MaterialTheme.colorScheme.onSecondary
+        )
     }
 }

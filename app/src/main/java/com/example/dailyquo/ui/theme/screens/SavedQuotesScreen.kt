@@ -136,10 +136,22 @@ fun SavedQuotesScreen(viewModel: QuoteViewModel, navController: NavHostControlle
                     )
                 ) {
                     items(quotes) { quote ->
-                        QuoteItem(quote.text, quote.author) {
-                            setQuoteToDelete(quote)
-                            setShowDialog(true)
-                        }
+                        QuoteItem(
+                            text = quote.text,
+                            author = quote.author,
+                            onDeleteClick = {
+                                setQuoteToDelete(quote)
+                                setShowDialog(true)
+                            },
+                            onCopyClick = {
+                                val clipboardManager = context.getSystemService(android.content.ClipboardManager::class.java)
+                                val clipData = android.content.ClipData.newPlainText("Quote: ", "\"" + quote.text + "\"" + "\n-" + quote.author)
+                                clipboardManager.setPrimaryClip(clipData)
+                                showToastMessage(context,
+                                    context.getString(R.string.copied_to_clipboard))
+                            }
+                        )
+
                     }
                 }
                 ScrollBar(lazyListState = lazyListState)

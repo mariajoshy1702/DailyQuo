@@ -23,4 +23,6 @@
     <string name="too_many_requests">Too many requests together!!\nYou can try again in a few seconds..</string>
     <string name="quote_for_you">QUOTE for YOU</string>
     <string name="saved_quotes">SAVED QUOTES</string>
+    <string name="copy">Copy</string>
+    <string name="copied_to_clipboard">Copied to clipboard!</string>
 </resources>
